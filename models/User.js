@@ -36,16 +36,11 @@ const userSchema = new Schema(
 );
 
 userSchema
-  .virtual('fullName')
+  .virtual('friends')
   .get(function () {
-    return `${this.first} ${this.last}`;
-  })
-  .set(function (v) {
-    const first = v.split(' ')[0];
-    const last = v.split(' ')[1];
-    this.set({ first, last });
-  });
+    return this.friends.length;
+});
 
-const User = model('user', userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;

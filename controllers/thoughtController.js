@@ -1,4 +1,7 @@
-const { Thought, User, Reactions } = require('../models');
+const { Thought, User } = require('../models');
+
+
+
 
 module.exports = {
     getThought(req, res) {
@@ -74,10 +77,10 @@ module.exports = {
         .catch((err) => res.status(500).json(err));
     },
     // Add a thought response
-    addThoughtResponse(req, res) {
+    addThoughtReaction(req, res) {
       Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
-        { $addToSet: { responses: req.body } },
+        { $addToSet: { Reaction: req.body } },
         { runValidators: true, new: true }
       )
         .then((thought) =>
@@ -88,10 +91,10 @@ module.exports = {
         .catch((err) => res.status(500).json(err));
     },
     // Remove thought response
-    removeThoughtResponse(req, res) {
+    removeThoughtReaction(req, res) {
       Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
-        { $pull: { reactions: { responseId: req.params.responseId } } },
+        { $pull: { reactions: { reactionId: req.params.reactionId } } },
         { runValidators: true, new: true }
       )
         .then((thought) =>
@@ -101,4 +104,5 @@ module.exports = {
         )
         .catch((err) => res.status(500).json(err));
     },
-  };
+};
+
