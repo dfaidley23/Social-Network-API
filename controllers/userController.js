@@ -42,9 +42,28 @@ module.exports = {
         : res.json({ message: 'User deleted successfully.'}))
     },
     addFriends(req, res) {
-
+      User.findOneAndUpdate(
+        { _id: req.params.userId},
+        { $addToSet: {friends: req.body } },
+        { runValidators: true, new: true })
+        .then((user) =>
+        !user
+          ? res.status(404).json({ message: 'No user with this id!' })
+          : res.json(user)
+      )
+      .catch((err) => res.status(500).json(err));
     },
     deleteFriends(req, res) {
-
-    },
+      User.findOneAndUpdate(
+        { _id: req.params.userId},
+        { $pull: { friends: { user: req.params.userId } } },
+        { runValidators: true, new: true }
+      )
+      .then((user) =>
+      !user
+        ? res.status(404).json({ message: 'No user with this id!' })
+        : res.json(user)
+    )
+    .catch((err) => res.status(500).json(err));
+  },
 };
