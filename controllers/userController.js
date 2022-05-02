@@ -9,8 +9,8 @@ module.exports = {
     getSingleUser(req, res) {
       User.findOne({ _id: req.params.userId })
         .select('-__v')
-        .populate('thoughts')
-        .populate('friends')
+        // .populate('thoughts')
+        // .populate('friends')
         .then((user) =>
           !user
             ? res.status(404).json({ message: 'No user with that ID' })
@@ -24,8 +24,8 @@ module.exports = {
     },
     updateUser(req, res) {
       User.findOneAndUpdate(
-        { _id: req.params.id}, 
-        { $addToSet: {friends: req.params.friendId}},
+        { _id: req.params.userId}, 
+        { $set: req.body },
         { runValidators: true, new: true }
         )
         .then((user) =>

@@ -4,12 +4,8 @@ const routes = require('./routes');
 
 const cwd = process.cwd();
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const app = express();
-
-const activity = cwd.includes('main')
-  ? cwd.split('/main/')[1]
-  : cwd;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
