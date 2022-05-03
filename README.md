@@ -20,7 +20,7 @@ This API is meant to function like the back end of any Social networking platfor
 ## Usage:
 Below you will be able to see a quick walkthrough video of how this applicaiton works.
 
-video link: https://drive.google.com/drive/folders/16Q_ZjB78DWCoJfrFVfqsVOS5FYd85T3S?usp=sharing 
+video link: https://drive.google.com/file/d/1mjZNHjxWw7f4KaR7Xp16XQJu_s1__TBQ/view
 
 
 ## License: 
